@@ -23,16 +23,13 @@ routes.post('/add', (req, res) => {
     return res.json(body)
 })
 
-routes.delete('/:id', (req, red) => {
-    const id = req.params.id
-
-    let newDb = db.filter(item => {
-        if(!item[id]){
-            return item
-        }
-    })
-
-    db = newDb
-    return res.send(newDb)
+routes.post('/login', (req, res) => {
+    const body = req.body
+    if(db.includes(req.body)){
+        return(res.json(db))
+    }else{
+        return(res.json(db))
+    }
 })
-module.exports= routes
+
+module.exports = routes
