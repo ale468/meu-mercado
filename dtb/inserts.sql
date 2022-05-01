@@ -1,0 +1,1 @@
+INSERT INTO meu_mercado.products VALUES (1, "vassoura Top Vrum");
