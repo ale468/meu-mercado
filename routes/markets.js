@@ -7,16 +7,6 @@ router.get('/', (req, res, next) => {
   });
 });
 
-router.get('/:productId', (req, res, next) => {
-  const id = req.params.productId;
-
-  
-    res.status(200).send({
-      mensagem: "usando um id normal",
-      id: id
-    });
-});
-
 router.post('/', (req, res, next) => {
   res.status(201).send({
       mensagem: "POST deu certo"
