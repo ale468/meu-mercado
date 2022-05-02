@@ -3,7 +3,7 @@ const router = express.Router();
 
 router.get('/', (req, res, next) => {
   res.status(200).send({
-      mensagem: "GET deu certo"
+      mensagem: "GET deu certo!"
   });
 });
 

@@ -4,7 +4,7 @@
   "description": "Primeira versão da api que recebera as requisições do react native.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
@@ -12,7 +12,9 @@
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
     "express": "^4.17.3",
-    "morgan": "^1.10.0",
-    "nodemon": "^2.0.15"
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
   }
 }
