@@ -5,3 +5,4 @@
     "MYSQL_DATABASE":"meu_mercado",
     "MYSQL_HOST":"localhost",
     "MYSQL_PORT":3306}
+}
