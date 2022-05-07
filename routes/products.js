@@ -22,13 +22,14 @@ router.post('/', (req, res, next) => {
   };
 
   res.status(201).send({
-      mensagem: "POST deu certo"
+      mensagem: "POST deu certo",
+      result: product
   });
 });
 
 router.patch('/', (req, res, next) => {
   res.status(201).send({
-      mensagem: "PATCH deu certo"
+      mensagem: "PATCH deu certo",
   });
 });
 

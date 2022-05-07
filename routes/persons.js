@@ -20,7 +20,8 @@ router.post('/', (req, res, next) => {
   };
   
   res.status(201).send({
-      mensagem: "POST deu certo"
+      mensagem: "POST deu certo",
+      result: person
   });
 });
 
