@@ -6,8 +6,11 @@ const personsRoute = require("./routes/persons");
 const itemsRoute = require("./routes/Items");
 const marketsRoute = require("./routes/markets");
 const morgan = require("morgan");
+const bodyParser = require("body-parser")
 
 app.use(morgan('dev'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use('/products', productsRoute);
 app.use('/persons', personsRoute);
