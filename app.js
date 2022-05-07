@@ -3,7 +3,7 @@ const app = express();
 
 const productsRoute = require("./routes/products");
 const personsRoute = require("./routes/persons");
-const itemsRoute = require("./routes/Items");
+const itemsRoute = require("./routes/items");
 const marketsRoute = require("./routes/markets");
 const morgan = require("morgan");
 const bodyParser = require("body-parser")

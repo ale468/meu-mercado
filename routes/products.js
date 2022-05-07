@@ -18,7 +18,6 @@ router.get('/:productId', (req, res, next) => {
 router.post('/', (req, res, next) => {
 
   const product = {
-    productId: req.body.productId,
     name: req.body.name
   };
 
