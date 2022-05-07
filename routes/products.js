@@ -7,13 +7,46 @@ router.get('/', (req, res, next) => {
       mensagem: "GET deu certo!"
   });
 });
+router.get('/*', (req, res, next) => {
+  mysql.getConnection((error, conn) => {
+    conn.query(
+      "SELECT * FROM products",
+      (error, result, field) => {
+        conn.release();
+        if(error){
+          res.status(500).send({
+            error: error,
+            response: null
+          })
+        }
+        res.status(200).send({
+          message: "Get concluído!",
+          result: result,
+        });
+    });
+  });
+});
 
 router.get('/:productId', (req, res, next) => {
   const id = req.params.productId;
-    res.status(200).send({
-      mensagem: "usando um id normal",
-      id: id
+  mysql.getConnection((error, conn) => {
+    conn.query(
+      "SELECT product_name FROM products WHERE product_id = ?",
+      [req.params.productId],
+      (error, result, field) => {
+        conn.release();
+        if(error){
+          res.status(500).send({
+            error: error,
+            response: null
+          })
+        }
+        res.status(200).send({
+          message: "Get concluído!",
+          result: result,
+        });
     });
+  });
 });
 
 router.post('/', (req, res, next) => {
