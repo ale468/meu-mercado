@@ -8,6 +8,17 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
+  
+  const person = {
+    cpf: req.body.cpf,
+    price: req.body.idLogin,
+    fullName: req.body.fullName,
+    user: req.body.user,
+    password: req.body.password,
+    marketId: req.body.marketId,
+    marketPassword: req.body.marketPassword,
+  };
+  
   res.status(201).send({
       mensagem: "POST deu certo"
   });

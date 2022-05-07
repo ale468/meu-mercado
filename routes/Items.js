@@ -8,8 +8,18 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
+
+  const item = {
+    marketId: req.body.name,
+    productId: req.body.price,
+    itemPrice: req.body.itemPrice,
+    productPicturePath: req.body.productPicturePath,
+    productDescription: req.body.productDescription
+  };
+
   res.status(201).send({
-      mensagem: "POST deu certo"
+      mensagem: "POST deu certo",
+      produtoCriado: produto
   });
 });
 
