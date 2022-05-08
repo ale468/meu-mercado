@@ -2,12 +2,10 @@ const express = require("express");
 const router = express.Router();
 const mysql = require("../mysql").pool;
 
-router.get('/:productId', (req, res, next) => {
-  const id = req.params.productId;
+router.get('/', (req, res, next) => {
   mysql.getConnection((error, conn) => {
     conn.query(
-      "SELECT product_name FROM products WHERE product_id = ?",
-      [req.params.productId],
+      "SELECT product_name FROM products",
       (error, result, field) => {
         conn.release();
         if(error){
@@ -25,7 +23,6 @@ router.get('/:productId', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-
   mysql.getConnection((error, conn) => {
     conn.query(
       "INSERT INTO products (product_name) VALUES (?)",
@@ -41,7 +38,8 @@ router.post('/', (req, res, next) => {
         res.status(201).send({
           mensagem: "Produto inserido com sucesso!"
         });
-    });
+      }
+    );
   });
 });
 
