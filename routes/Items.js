@@ -116,8 +116,23 @@ router.patch('/', (req, res, next) => {
 
 
 router.delete('/', (req, res, next) => {
-  res.status(201).send({
-      mensagem: "DELETE deu certo"
+  mysql.getConnection((error, conn) => {
+    conn.query(
+      "DELETE FROM items WHERE item_id = ?",
+      [req.body.itemId],
+      (error, result, field) => {
+        conn.release();
+        if(error){
+          res.status(500).send({
+            error: error,
+            response: null
+          })
+        }
+        res.status(201).send({
+          mensagem: "Item excluído com sucesso!"
+        });
+      }
+    );
   });
 });
 
