@@ -1,39 +1,48 @@
 const express = require("express");
 const router = express.Router();
+const mysql = require("../mysql").pool;
 
 router.get('/', (req, res, next) => {
   res.status(200).send({
-      mensagem: "GET deu certo"
+      message: "GET deu certo"
   });
 });
 
 router.post('/', (req, res, next) => {
-  
-  const person = {
-    cpf: req.body.cpf,
-    price: req.body.idLogin,
-    fullName: req.body.fullName,
-    user: req.body.user,
-    password: req.body.password,
-    marketId: req.body.marketId,
-    marketPassword: req.body.marketPassword,
-  };
-  
-  res.status(201).send({
-      mensagem: "POST deu certo",
-      result: person
-  });
-});
-
-router.patch('/', (req, res, next) => {
-  res.status(201).send({
-      mensagem: "PATCH deu certo"
-  });
-});
-
-router.delete('/', (req, res, next) => {
-  res.status(201).send({
-      mensagem: "DELETE deu certo"
+  mysql.getConnection((error, conn) => {
+    if (req.body.marketId != "") {
+      conn.query(
+        "SELECT * FROM markets WHERE market_id = ?",
+        req.body.marketId,
+        (error, result, field) => {
+          if (result.length == 0){
+            res.status(400).send({
+              message: "Market id not found!"
+            })
+          }else if(req.body.marketPassword == result[0].market_password){
+            conn.query(
+              "INSERT INTO persons VALUES (?,?,?,?,?)",
+              [req.body.cpf, req.body.fullName, req.body.user, req.body.password, req.body.marketId],
+              (error, result, field) => {
+                conn.release();
+                if(error){
+                  res.status(500).send({
+                    error: error,
+                    response: null
+                  })
+                }
+                res.status(201).send({
+                  message: "Produto inserido com sucesso!",
+                });
+            });
+          }else{
+            res.status(400).send({
+              message: "Senha inválida para esse mercado!",
+            })
+          }
+        }
+      );
+    }
   });
 });
 
